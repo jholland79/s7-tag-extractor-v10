@@ -1,10 +1,12 @@
 """Parser for SYMLIST.DBF symbol tables."""
 
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
-# This will be mocked in tests
-DBF = None
+# This will be mocked in tests; typed as Callable to satisfy type checker
+DBF: Callable[[str], Any] = None  # type: ignore[assignment]
 
 # DBF field names for SYMLIST.DBF
 FIELD_NAME = "_SKZ"
