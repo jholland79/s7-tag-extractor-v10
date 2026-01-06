@@ -1,0 +1,33 @@
+# Taplo TOML formatter configuration
+# https://taplo.tamasfe.dev/configuration/
+
+[formatting]
+# Align consecutive entries vertically
+align_entries = false
+# Align consecutive comments after entries
+align_comments = true
+# Put trailing commas in multi-line arrays
+array_trailing_comma = true
+# Max line width before wrapping
+column_width = 88
+# Indentation
+indent_tables = false
+indent_entries = false
+# Reorder keys alphabetically
+reorder_keys = true
+# Reorder arrays (disabled - order may matter)
+reorder_arrays = false
+# Allowed blank lines between entries
+allowed_blank_lines = 1
+# Compact arrays on one line if they fit
+compact_arrays = true
+# Compact inline tables
+compact_inline_tables = false
+
+[[rule]]
+# pyproject.toml specific rules
+include = ["pyproject.toml"]
+keys = ["project.dependencies", "project.optional-dependencies.*"]
+[rule.formatting]
+# Don't reorder dependencies - order can indicate priority
+reorder_arrays = false

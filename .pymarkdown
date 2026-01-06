@@ -1,0 +1,83 @@
+{
+  "mode": {
+    "strict-config": true
+  },
+  "plugins": {
+    "heading-style": {
+      "style": "atx"
+    },
+    "ul-style": {
+      "style": "dash"
+    },
+    "ul-indent": {
+      "indent": 2
+    },
+    "no-trailing-spaces": {
+      "br_spaces": 2
+    },
+    "no-hard-tabs": {
+      "code_blocks": false
+    },
+    "no-multiple-blanks": {
+      "maximum": 1
+    },
+    "line-length": {
+      "enabled": false
+    },
+    "blanks-around-headings": {
+      "lines_above": 1,
+      "lines_below": 1
+    },
+    "no-duplicate-heading": {
+      "siblings_only": true
+    },
+    "single-h1": {
+      "front_matter_title": ""
+    },
+    "no-trailing-punctuation": {
+      "punctuation": ".,;:!"
+    },
+    "ol-prefix": {
+      "style": "ordered"
+    },
+    "list-marker-space": {
+      "ul_single": 1,
+      "ol_single": 1,
+      "ul_multi": 1,
+      "ol_multi": 1
+    },
+    "no-inline-html": {
+      "enabled": false
+    },
+    "no-bare-urls": {
+      "enabled": false
+    },
+    "hr-style": {
+      "style": "---"
+    },
+    "no-emphasis-as-heading": {
+      "enabled": false
+    },
+    "fenced-code-language": {
+      "enabled": false
+    },
+    "first-line-h1": {
+      "enabled": false
+    },
+    "code-block-style": {
+      "style": "fenced"
+    },
+    "single-trailing-newline": {
+      "enabled": true
+    },
+    "code-fence-style": {
+      "style": "backtick"
+    },
+    "emphasis-style": {
+      "style": "asterisk"
+    },
+    "strong-style": {
+      "style": "asterisk"
+    }
+  }
+}
