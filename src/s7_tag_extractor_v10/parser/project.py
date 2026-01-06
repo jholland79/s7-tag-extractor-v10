@@ -2,6 +2,8 @@
 
 from pathlib import Path
 
+SYMLIST_PATTERN = "**/SYMLIST.DBF"
+
 
 class S7Project:
     """Navigate and extract information from S7 project files."""
@@ -13,4 +15,4 @@ class S7Project:
 
     def find_symlist_files(self) -> list[Path]:
         """Find all SYMLIST.DBF files in the project."""
-        return list(self.project_dir.glob("**/SYMLIST.DBF"))
+        return list(self.project_dir.glob(SYMLIST_PATTERN))
