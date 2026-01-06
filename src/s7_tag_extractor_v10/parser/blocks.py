@@ -13,6 +13,10 @@ FIELD_NUMBER = "_NUMMER"
 FIELD_TYPE = "_TYP"
 FIELD_DATA = "_DATEN"
 
+# Binary markers in block element data
+METADATA_MARKER = b"\x10\x00"
+NULL_TERMINATOR = b"\x00"
+
 
 @dataclass
 class BlockElement:
@@ -67,8 +71,8 @@ def _parse_block_elements(data: bytes) -> list[BlockElement]:
     offset = 0
 
     while offset < len(data):
-        # Skip metadata byte if present at offset
-        if offset < len(data) and data[offset : offset + 2] == b"\x10\x00":
+        # Skip metadata marker if present at offset
+        if offset < len(data) and data[offset : offset + 2] == METADATA_MARKER:
             offset += 2
         elif offset < len(data) and data[offset] == 0:
             # Skip single null bytes
@@ -76,7 +80,7 @@ def _parse_block_elements(data: bytes) -> list[BlockElement]:
             continue
 
         # Read element name (null-terminated string)
-        name_end = data.find(b"\x00", offset)
+        name_end = data.find(NULL_TERMINATOR, offset)
         if name_end == -1 or name_end == offset:
             break
 
@@ -88,7 +92,7 @@ def _parse_block_elements(data: bytes) -> list[BlockElement]:
         offset = name_end + 1
 
         # Read data type (null-terminated string)
-        type_end = data.find(b"\x00", offset)
+        type_end = data.find(NULL_TERMINATOR, offset)
         if type_end == -1:
             break
 
