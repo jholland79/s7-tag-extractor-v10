@@ -1,0 +1,77 @@
+# yamllint configuration
+# https://yamllint.readthedocs.io/
+
+extends: default
+
+# Ignore generated/external files
+ignore: |
+  .venv/
+  node_modules/
+  .git/
+
+rules:
+  # Line length - allow long lines (common in CI configs with URLs)
+  line-length:
+    max: 120
+    allow-non-breakable-words: true
+    allow-non-breakable-inline-mappings: true
+
+  # Indentation - 2 spaces, consistent
+  indentation:
+    spaces: 2
+    indent-sequences: true
+    check-multi-line-strings: false
+
+  # Truthy values - allow GitHub Actions 'on' keyword
+  truthy:
+    allowed-values: ['true', 'false', 'yes', 'no', 'on', 'off']
+    check-keys: false
+
+  # Document markers - not required
+  document-start: disable
+  document-end: disable
+
+  # Comments - relaxed rules
+  comments:
+    require-starting-space: false
+    min-spaces-from-content: 1
+
+  # Empty values - allow them
+  empty-values:
+    forbid-in-block-mappings: false
+    forbid-in-flow-mappings: false
+
+  # Brackets and braces - consistent spacing
+  brackets:
+    min-spaces-inside: 0
+    max-spaces-inside: 0
+  braces:
+    min-spaces-inside: 0
+    max-spaces-inside: 0
+
+  # Colons and commas
+  colons:
+    max-spaces-before: 0
+    max-spaces-after: 1
+  commas:
+    max-spaces-before: 0
+    min-spaces-after: 1
+    max-spaces-after: 1
+
+  # Hyphens in lists
+  hyphens:
+    max-spaces-after: 1
+
+  # Key duplicates - error
+  key-duplicates: enable
+
+  # New lines
+  new-line-at-end-of-file: enable
+  new-lines:
+    type: unix
+
+  # Octal values - disabled (rarely used)
+  octal-values: disable
+
+  # Quoted strings - any style allowed
+  quoted-strings: disable
