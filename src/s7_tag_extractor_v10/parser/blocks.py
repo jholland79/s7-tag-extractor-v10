@@ -18,6 +18,24 @@ METADATA_MARKER = b"\x10\x00"
 NULL_TERMINATOR = b"\x00"
 
 
+def _read_null_terminated_string(data: bytes, offset: int) -> tuple[str, int] | None:
+    """Read a null-terminated string from binary data.
+
+    Args:
+        data: Binary data containing the string.
+        offset: Starting position to read from.
+
+    Returns:
+        Tuple of (decoded string, new offset after null terminator),
+        or None if no valid string found.
+    """
+    end = data.find(NULL_TERMINATOR, offset)
+    if end == -1:
+        return None
+    value = data[offset:end].decode("utf-8", errors="replace")
+    return (value, end + 1)
+
+
 @dataclass
 class BlockElement:
     """Represents an element within a data block."""
@@ -80,24 +98,20 @@ def _parse_block_elements(data: bytes) -> list[BlockElement]:
             continue
 
         # Read element name (null-terminated string)
-        name_end = data.find(NULL_TERMINATOR, offset)
-        if name_end == -1 or name_end == offset:
+        result = _read_null_terminated_string(data, offset)
+        if result is None or result[0] == "":
             break
 
-        name = data[offset:name_end].decode("utf-8", errors="replace")
+        name, offset = result
         if not name:  # Skip empty names
-            offset = name_end + 1
             continue
 
-        offset = name_end + 1
-
         # Read data type (null-terminated string)
-        type_end = data.find(NULL_TERMINATOR, offset)
-        if type_end == -1:
+        result = _read_null_terminated_string(data, offset)
+        if result is None:
             break
 
-        data_type = data[offset:type_end].decode("utf-8", errors="replace")
-        offset = type_end + 1
+        data_type, offset = result
 
         elements.append(BlockElement(name=name, data_type=data_type))
 
