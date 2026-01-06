@@ -11,8 +11,8 @@ array_trailing_comma = true
 # Max line width before wrapping
 column_width = 88
 # Indentation
-indent_tables = false
 indent_entries = false
+indent_tables = false
 # Reorder keys alphabetically
 reorder_keys = true
 # Reorder arrays (disabled - order may matter)
