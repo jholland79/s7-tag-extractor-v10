@@ -25,9 +25,7 @@ class TestParseSymlist:
         symlist_path = Path("/fake/SYMLIST.DBF")
 
         # Act
-        with patch(
-            "s7_tag_extractor_v10.parser.symbols.DBF", return_value=mock_table
-        ):
+        with patch("s7_tag_extractor_v10.parser.symbols.DBF", return_value=mock_table):
             symbols = parse_symlist(symlist_path)
 
         # Assert
