@@ -72,9 +72,9 @@ def _parse_block_elements(data: bytes) -> list[BlockElement]:
 
     while offset < len(data):
         # Skip metadata marker if present at offset
-        if offset < len(data) and data[offset : offset + 2] == METADATA_MARKER:
+        if data[offset : offset + 2] == METADATA_MARKER:
             offset += 2
-        elif offset < len(data) and data[offset] == 0:
+        elif data[offset] == 0:
             # Skip single null bytes
             offset += 1
             continue
