@@ -30,15 +30,13 @@ def parse_symlist(symlist_path: Path) -> list[Symbol]:
     Returns:
         A list of Symbol objects extracted from the file.
     """
-    symbols = []
     table = DBF(str(symlist_path))
 
-    for record in table:
-        symbol = Symbol(
+    return [
+        Symbol(
             name=record[FIELD_NAME],
             address=record[FIELD_ADDRESS],
             comment=record[FIELD_COMMENT],
         )
-        symbols.append(symbol)
-
-    return symbols
+        for record in table
+    ]
