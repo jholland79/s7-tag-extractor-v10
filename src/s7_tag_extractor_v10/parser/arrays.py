@@ -5,6 +5,18 @@ import re
 from s7_tag_extractor_v10.models import Tag
 from s7_tag_extractor_v10.parser.blocks import BlockElement
 
+# Size in bytes for S7 data types
+TYPE_SIZES = {
+    "INT": 2,
+    "DINT": 4,
+    "REAL": 4,
+    "BOOL": 1,
+    "BYTE": 1,
+    "WORD": 2,
+    "DWORD": 4,
+}
+DEFAULT_TYPE_SIZE = 2
+
 
 def expand_array(element: BlockElement, db_number: int, base_offset: int) -> list[Tag]:
     """Expand an array element into individual tags with correct addresses.
@@ -26,17 +38,7 @@ def expand_array(element: BlockElement, db_number: int, base_offset: int) -> lis
     end_idx = int(match.group(2))
     element_type = match.group(3)
 
-    # Determine size in bytes for the element type
-    type_sizes = {
-        "INT": 2,
-        "DINT": 4,
-        "REAL": 4,
-        "BOOL": 1,
-        "BYTE": 1,
-        "WORD": 2,
-        "DWORD": 4,
-    }
-    element_size = type_sizes.get(element_type, 2)
+    element_size = TYPE_SIZES.get(element_type, DEFAULT_TYPE_SIZE)
 
     tags = []
     for idx in range(start_idx, end_idx + 1):
