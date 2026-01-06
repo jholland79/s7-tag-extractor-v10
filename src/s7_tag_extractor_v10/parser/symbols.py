@@ -6,6 +6,11 @@ from pathlib import Path
 # This will be mocked in tests
 DBF = None
 
+# DBF field names for SYMLIST.DBF
+FIELD_NAME = "_SKZ"
+FIELD_ADDRESS = "_OPHIST"
+FIELD_COMMENT = "_COMMENT"
+
 
 @dataclass
 class Symbol:
@@ -30,9 +35,9 @@ def parse_symlist(symlist_path: Path) -> list[Symbol]:
 
     for record in table:
         symbol = Symbol(
-            name=record["_SKZ"],
-            address=record["_OPHIST"],
-            comment=record["_COMMENT"],
+            name=record[FIELD_NAME],
+            address=record[FIELD_ADDRESS],
+            comment=record[FIELD_COMMENT],
         )
         symbols.append(symbol)
 
